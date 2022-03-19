@@ -2,6 +2,8 @@ const express = require('express');
 const todoRouter = express.Router();
 // DB Connection
 const pool = require('../modules/pool');
+// const { DateTime } = require("luxon");
+const moment = require('moment');
 
 // GET list from DB
 todoRouter.get('/', (req, res) => {
@@ -13,6 +15,9 @@ todoRouter.get('/', (req, res) => {
 
     pool.query(queryText).then(todo_list => {
         console.log('from DB', todo_list.rows);
+        for (const task of todo_list.rows) {
+            task.complete_by_date = moment(task.complete_by_date).format('DD-MM-YYYY');
+        }
         res.send(todo_list.rows)
     }).catch(error => {
         console.log('Error getting todo_list', error);
@@ -23,7 +28,6 @@ todoRouter.get('/', (req, res) => {
 // POST user data to DB
 todoRouter.post('/', (req, res) => {
     let newTask = req.body.task;
-    let date = req.body.date;
 
     let queryText = `
     INSERT INTO "todo_list" 
