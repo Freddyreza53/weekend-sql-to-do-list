@@ -10,12 +10,42 @@ function ready() {
     $('#viewTasks').on('click', '.deleteBtn', deleteTask);
     $('#viewTasks').on('click', '.completeBtn', completeTask);
 
-    $('.all').on('click', sortAll);
+    $('.all').on('click', showAll);
+    $('.inProgress').on('click', showInProgress);
+    $('.complete').on('click', showCompleted);
 }
-function sortAll() {
-    console.log('in sortAll');
+function showAll() {
+    console.log('in showAll');
     getTodoList()
 }
+
+function showInProgress() {
+    console.log('in showInProgress');
+
+    $.ajax({
+        method: 'GET',
+        url: '/todoList/showInProgress'
+    }).then(function (todoList) {
+        renderList(todoList);
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
+
+function showCompleted() {
+    console.log('in showCompleted');
+
+    $.ajax({
+        method: 'GET',
+        url: '/todoList/showCompleted'
+    }).then(function (todoList) {
+        renderList(todoList);
+    }).catch(function (err) {
+        console.log(err);
+    });
+}
+
+
 function deleteTask() {
     console.log('in deleteTask on click');
     let id = $(this).closest('tr').data('id')

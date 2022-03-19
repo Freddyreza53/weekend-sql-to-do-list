@@ -28,6 +28,10 @@ header {
     align-items: center;
 }
 
+.showBar {
+    background-color: white;
+}
+
 .mainContainer {
     background-color: white;
     min-height: 50vh;
