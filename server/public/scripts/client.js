@@ -7,6 +7,29 @@ function ready() {
     
     getTodoList()
     $('#addBtn').on('click', addTask);
+    $('#viewTasks').on('click', '.deleteBtn', deleteTask);
+    $('#viewTasks').on('click', '.completeBtn', completeTask);
+}
+
+function deleteTask() {
+    console.log('in deleteTask on click');
+    let id = $(this).closest('tr').data('id')
+    
+    $.ajax({
+        method: 'DELETE',
+        url: `/todoList/${id}`
+    }).then(function(response) {
+        console.log('task deleted');
+        getTodoList();
+    }).catch(function(err) {
+        alert('Problem deleting task', err);
+    })
+
+}
+
+function completeTask() {
+    console.log('in completeTask');
+    
 }
 
 function addTask() {
@@ -57,12 +80,12 @@ function renderList(listOfTasks) {
         }
 
         $('#viewTasks').append(`
-            <tr>
+            <tr data-id="${task.id}">
                 <td>${task.task}</td>
                 <td>${completeStatus}</td>
                 <td>${task.complete_by_date}</td>
-                <td><button>DELETE</button></td>
-                <td><button>COMPLETE</button></td>
+                <td><button class="deleteBtn">DELETE</button></td>
+                <td><button class="completeBtn">COMPLETE</button></td>
             </tr>
         `);
     }
