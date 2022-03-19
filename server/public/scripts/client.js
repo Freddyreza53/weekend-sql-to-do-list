@@ -29,7 +29,17 @@ function deleteTask() {
 
 function completeTask() {
     console.log('in completeTask');
-    
+
+    let id = $(this).closest('tr').data('id')
+    console.log('in completeTask', id);
+    $.ajax({
+        url: `/todoList/${id}`,
+        method: 'PUT'
+    }).then(function (response) {
+        getTodoList();
+    }).catch(function (err) {
+        console.log(err)
+    })
 }
 
 function addTask() {
@@ -75,18 +85,27 @@ function renderList(listOfTasks) {
 
         if (task.status === false) {
             completeStatus = 'In Progress';
-        } else {
-            completeStatus = 'Task Complete';
-        }
-
-        $('#viewTasks').append(`
+            $('#viewTasks').append(`
             <tr data-id="${task.id}">
                 <td>${task.task}</td>
-                <td>${completeStatus}</td>
+                <td class="red">${completeStatus}</td>
                 <td>${task.complete_by_date}</td>
                 <td><button class="deleteBtn">DELETE</button></td>
                 <td><button class="completeBtn">COMPLETE</button></td>
             </tr>
         `);
+        } else {
+            completeStatus = 'Task Complete';
+            $('#viewTasks').append(`
+            <tr data-id="${task.id}">
+                <td>${task.task}</td>
+                <td class="green">${completeStatus}</td>
+                <td>${task.complete_by_date}</td>
+                <td><button class="deleteBtn">DELETE</button></td>
+            </tr>
+        `);
+        }
+
+        
     }
 }

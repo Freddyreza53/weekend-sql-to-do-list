@@ -28,6 +28,7 @@ todoRouter.get('/', (req, res) => {
 // POST user data to DB
 todoRouter.post('/', (req, res) => {
     let newTask = req.body.task;
+    let date = req.body.date;
 
     let queryText = `
     INSERT INTO "todo_list" 
@@ -45,24 +46,45 @@ todoRouter.post('/', (req, res) => {
     });
 })
 
+// DELETE task using id number
 todoRouter.delete('/:id', (req, res) => {
     console.log('delete task', req.params.id);
     
     let id = req.params.id;
-    const queryText = `
+    let queryText = `
     DELETE FROM "todo_list"
     WHERE "id" = $1;
     `;
 
     const values = [id];
 
-    pool.query(queryText,values)
-    .then(result => {
+    pool.query(queryText, values).then(result => {
         res.sendStatus(204);
     }).catch(err => {
         console.log(err);
         res.sendStatus(500);
-    })
+    });
+})
+
+// PUT update status of task
+todoRouter.put('/:id', (req, res) => {
+    console.log('update task', req.params.id);
+    
+    let id = req.params.id;
+    let queryText = `
+    UPDATE "todo_list"
+    SET "status" = TRUE
+    WHERE "id" = $1;
+    `;
+
+    const values = [id];
+
+    pool.query(queryText, values).then(results => {
+        res.sendStatus(200);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500);
+    });
 })
 
 
