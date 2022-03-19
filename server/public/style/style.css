@@ -1,8 +1,19 @@
 body {
-    background-color: bisque;
+    background-image: url("../images/mn_skyline.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+
+}
+.container {
+    background: rgba(0, 0, 0, 0.5);
+    min-height: 100vh;
+    min-width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 input {
@@ -29,10 +40,24 @@ table {
     margin: 10px;
 }
 
-.red {
-    background-color: red;
+thead {
+    border: 2px solid black;
 }
 
+tr {
+    border-bottom: .5px solid black;
+}
+th {
+    text-align: center;
+}
+
+td {
+    padding: 5px;
+}
+
+h1 {
+    color: white;
+}
 .green {
-    background-color: green;
+    background-color: rgba(18, 168, 50, 0.329);
 }

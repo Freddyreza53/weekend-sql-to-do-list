@@ -12,33 +12,51 @@
     <title>Todo Task List</title>
 </head>
 <body>
-    <header>
-        <h1>My Todo List</h1>
-        <div>
-            <input type="text" placeholder="Enter Todo Item Here" id="todoIn">
-            <input type="date" id="date">
-            <button type="submit" class="btn btn-primary" id="addBtn">Add</button>
-        </div>
-    </header>
-    
-    <main class="mainContainer">
-        <table>
-            <thead>
-                <tr>
-                    <th>Todo Item</th>
-                    <th>Status</th>
-                    <th>Complete By Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="viewTasks">
-                <!-- <tr>
-                    <td>Todo Item</td>
-                    <td>Status</td>
-                    <td>Action</td>
-                </tr> -->
-            </tbody>
-        </table>
-    </main>
+    <div class="container">
+        <header>
+            <h1 class="display-1">My Todo List</h1>
+            <div>
+                <input type="text" placeholder="Enter Task Here" id="todoIn">
+                <input type="date" id="date">
+                <button type="submit" class="btn btn-primary" id="addBtn">Add</button>
+            </div>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="all nav-link"  href="#">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="inProgress nav-link" href="#">In Progress</a>
+                </li>
+                <li class="nav-item">
+                    <a class="complete nav-link" href="#">Completed</a>
+                </li>
+            </ul>
+            <!-- <div>
+                <button>Completed</button>
+                <button>In Progress</button>
+                <button>All Tasks</button>
+            </div> -->
+        </header>
+
+        <main class="mainContainer">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Status</th>
+                        <th>Complete By</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="viewTasks">
+                    <!-- <tr>
+                        <td>Todo Item</td>
+                        <td>Status</td>
+                        <td>Action</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </main>
+    </div>
 </body>
 </html>

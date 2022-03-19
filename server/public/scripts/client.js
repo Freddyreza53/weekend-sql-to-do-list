@@ -9,8 +9,13 @@ function ready() {
     $('#addBtn').on('click', addTask);
     $('#viewTasks').on('click', '.deleteBtn', deleteTask);
     $('#viewTasks').on('click', '.completeBtn', completeTask);
-}
 
+    $('.all').on('click', sortAll);
+}
+function sortAll() {
+    console.log('in sortAll');
+    getTodoList()
+}
 function deleteTask() {
     console.log('in deleteTask on click');
     let id = $(this).closest('tr').data('id')
@@ -88,10 +93,14 @@ function renderList(listOfTasks) {
             $('#viewTasks').append(`
             <tr data-id="${task.id}">
                 <td>${task.task}</td>
-                <td class="red">${completeStatus}</td>
+                <td>${completeStatus}</td>
                 <td>${task.complete_by_date}</td>
-                <td><button class="deleteBtn">DELETE</button></td>
-                <td><button class="completeBtn">COMPLETE</button></td>
+                <td>
+                    <button class="completeBtn btn btn-success ms-1">COMPLETE</button>
+                </td>
+                <td>
+                    <button class="deleteBtn btn btn-danger">DELETE</button>
+                </td>
             </tr>
         `);
         } else {
@@ -101,11 +110,11 @@ function renderList(listOfTasks) {
                 <td>${task.task}</td>
                 <td class="green">${completeStatus}</td>
                 <td>${task.complete_by_date}</td>
-                <td><button class="deleteBtn">DELETE</button></td>
+                <td></td>
+                <td><button class="deleteBtn btn btn-danger">DELETE</button></td>
             </tr>
         `);
         }
-
         
     }
 }
