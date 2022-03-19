@@ -10,7 +10,8 @@ todoRouter.get('/', (req, res) => {
     console.log('in GET');
 
     let queryText = `
-        SELECT * FROM "todo_list";
+        SELECT * FROM "todo_list"
+        ORDER BY "complete_by_date" ASC;
     `;
 
     pool.query(queryText).then(todo_list => {
@@ -24,6 +25,51 @@ todoRouter.get('/', (req, res) => {
         res.sendStatus(500);
     });
 })
+
+// GET list from DB in progress only
+todoRouter.get('/showInProgress', (req, res) => {
+    console.log('in GET');
+
+    let queryText = `
+        SELECT * FROM "todo_list"
+        WHERE "status" = FALSE
+        ORDER BY "complete_by_date" ASC;
+    `;
+
+    pool.query(queryText).then(todo_list => {
+        console.log('from DB', todo_list.rows);
+        for (const task of todo_list.rows) {
+            task.complete_by_date = moment(task.complete_by_date).format('ddd, MMMM Do YYYY');
+        }
+        res.send(todo_list.rows)
+    }).catch(error => {
+        console.log('Error getting todo_list', error);
+        res.sendStatus(500);
+    });
+})
+
+// GET list from DB completed only
+todoRouter.get('/showCompleted', (req, res) => {
+    console.log('in GET');
+
+    let queryText = `
+        SELECT * FROM "todo_list"
+        WHERE "status" = TRUE
+        ORDER BY "complete_by_date" ASC;
+    `;
+
+    pool.query(queryText).then(todo_list => {
+        console.log('from DB', todo_list.rows);
+        for (const task of todo_list.rows) {
+            task.complete_by_date = moment(task.complete_by_date).format('ddd, MMMM Do YYYY');
+        }
+        res.send(todo_list.rows)
+    }).catch(error => {
+        console.log('Error getting todo_list', error);
+        res.sendStatus(500);
+    });
+})
+
 
 // POST user data to DB
 todoRouter.post('/', (req, res) => {
