@@ -13,11 +13,54 @@ function ready() {
     $('.all').on('click', showAll);
     $('.inProgress').on('click', showInProgress);
     $('.complete').on('click', showCompleted);
+
+    // $('.sortTask').on('click', sortTask);
+    // $('.sortInProgress').on('click', sortInProgress);
+    // $('.sortComplete').on('click', sortDateCompleted);
 }
 function showAll() {
     console.log('in showAll');
     getTodoList()
 }
+
+// function sortTask() {
+//     console.log('in sortTask');
+    
+//     $.ajax({
+//         method: 'GET',
+//         url: '/todoList/sortTask'
+//     }).then(function (todoList) {
+//         renderList(todoList);
+//     }).catch(function (err) {
+//         console.log(err);
+//     });
+// }
+
+// function sortInProgress() {
+//     console.log('in sortInProgress');
+    
+//     $.ajax({
+//         method: 'GET',
+//         url: '/todoList/sortInProgress'
+//     }).then(function (todoList) {
+//         renderList(todoList);
+//     }).catch(function (err) {
+//         console.log(err);
+//     });
+// }
+
+// function sortDateCompleted() {
+//     console.log('in sortDateCompleted');
+    
+//     $.ajax({
+//         method: 'GET',
+//         url: '/todoList/sortDateCompleted'
+//     }).then(function (todoList) {
+//         renderList(todoList);
+//     }).catch(function (err) {
+//         console.log(err);
+//     });
+// }
 
 function showInProgress() {
     console.log('in showInProgress');
@@ -45,7 +88,6 @@ function showCompleted() {
     });
 }
 
-
 function deleteTask() {
     console.log('in deleteTask on click');
     let id = $(this).closest('tr').data('id')
@@ -59,7 +101,6 @@ function deleteTask() {
     }).catch(function(err) {
         alert('Problem deleting task', err);
     })
-
 }
 
 function completeTask() {
@@ -90,11 +131,12 @@ function addTask() {
         url: '/todoList',
         data: taskToSend
     }).then(function(response) {
+        $('#todoIn').val('');
+        $('#date').val('');
         getTodoList();
     }).catch(function(err) {
         alert('Problem adding task', err);
     })
-
 }
 
 function getTodoList() {
@@ -145,6 +187,5 @@ function renderList(listOfTasks) {
             </tr>
         `);
         }
-        
     }
 }
