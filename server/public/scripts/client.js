@@ -14,53 +14,72 @@ function ready() {
     $('.inProgress').on('click', showInProgress);
     $('.complete').on('click', showCompleted);
 
+    $('#searchBtn').on('click', searchTask)
+
     // $('.sortTask').on('click', sortTask);
     // $('.sortInProgress').on('click', sortInProgress);
     // $('.sortComplete').on('click', sortDateCompleted);
 }
+
+function searchList(list) {
+    let task = $('#todoIn').val();
+    let date = $('#date').val();
+    let newList = [];
+    for (const item of list) {
+        if (date == '' && task == '') {
+            return list;
+        }
+        if (item.task.toLowerCase().includes(task)) {
+            newList.push(item);
+        }
+        //     if (item.task.includes(task)) {
+        //         newList.push(item);
+        //     }
+        // } else if (task == '') {
+        //     if (date == item.complete_by_date) {
+        //         newList.push(item);
+        //     }
+        // } 
+        // if (item.task.includes(task)) {
+        //     newList.push(item);
+        // }
+    }
+
+    return newList;
+}
+
+function searchTask() {
+    console.log('in searchTask');
+
+    getTodoList()
+
+    $.ajax({
+        method: 'GET',
+        url: '/todoList'
+    }).then(function (todoList) {
+        renderList(searchList(todoList));
+    }).catch(function (err) {
+        console.log(err);
+    });
+
+    // $.ajax({
+    //     method: 'PUT',
+    //     url: '/todoList/searchTask',
+    //     data: {
+    //         task: $('#todoIn').val(),
+    //         date: $('#date').val()
+    //     }
+    // }).then(function (todoList) {
+    //     renderList(todoList);
+    // }).catch(function (err) {
+    //     console.log(err);
+    // });
+}
+
 function showAll() {
     console.log('in showAll');
     getTodoList()
 }
-
-// function sortTask() {
-//     console.log('in sortTask');
-    
-//     $.ajax({
-//         method: 'GET',
-//         url: '/todoList/sortTask'
-//     }).then(function (todoList) {
-//         renderList(todoList);
-//     }).catch(function (err) {
-//         console.log(err);
-//     });
-// }
-
-// function sortInProgress() {
-//     console.log('in sortInProgress');
-    
-//     $.ajax({
-//         method: 'GET',
-//         url: '/todoList/sortInProgress'
-//     }).then(function (todoList) {
-//         renderList(todoList);
-//     }).catch(function (err) {
-//         console.log(err);
-//     });
-// }
-
-// function sortDateCompleted() {
-//     console.log('in sortDateCompleted');
-    
-//     $.ajax({
-//         method: 'GET',
-//         url: '/todoList/sortDateCompleted'
-//     }).then(function (todoList) {
-//         renderList(todoList);
-//     }).catch(function (err) {
-//         console.log(err);
-//     });
-// }
 
 function showInProgress() {
     console.log('in showInProgress');
@@ -165,7 +184,7 @@ function renderList(listOfTasks) {
             $('#viewTasks').append(`
             <tr data-id="${task.id}">
                 <td>${task.task}</td>
-                <td>${completeStatus}</td>
+                <td class="yellow">${completeStatus}</td>
                 <td>${task.complete_by_date}</td>
                 <td>
                     <button class="completeBtn btn btn-success ms-1">COMPLETE</button>
@@ -174,7 +193,7 @@ function renderList(listOfTasks) {
                     <button class="deleteBtn btn btn-danger">DELETE</button>
                 </td>
             </tr>
-        `);
+            `);
         } else {
             completeStatus = 'Task Complete';
             $('#viewTasks').append(`
@@ -185,7 +204,46 @@ function renderList(listOfTasks) {
                 <td></td>
                 <td><button class="deleteBtn btn btn-danger">DELETE</button></td>
             </tr>
-        `);
+            `);
         }
     }
 }
+
+// function sortTask() {
+//     console.log('in sortTask');
+    
+//     $.ajax({
+//         method: 'GET',
+//         url: '/todoList/sortTask'
+//     }).then(function (todoList) {
+//         renderList(todoList);
+//     }).catch(function (err) {
+//         console.log(err);
+//     });
+// }
+
+// function sortInProgress() {
+//     console.log('in sortInProgress');
+    
+//     $.ajax({
+//         method: 'GET',
+//         url: '/todoList/sortInProgress'
+//     }).then(function (todoList) {
+//         renderList(todoList);
+//     }).catch(function (err) {
+//         console.log(err);
+//     });
+// }
+
+// function sortDateCompleted() {
+//     console.log('in sortDateCompleted');
+    
+//     $.ajax({
+//         method: 'GET',
+//         url: '/todoList/sortDateCompleted'
+//     }).then(function (todoList) {
+//         renderList(todoList);
+//     }).catch(function (err) {
+//         console.log(err);
+//     });
+// }
