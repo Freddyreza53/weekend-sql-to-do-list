@@ -67,6 +67,7 @@ todoRouter.get('/showCompleted', (req, res) => {
     });
 })
 
+// Attempt at using DB to search
 // todoRouter.get('/searchTask', (req, res) => {
 //     console.log('in GET', req.body);
 

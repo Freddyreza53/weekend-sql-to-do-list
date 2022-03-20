@@ -20,7 +20,7 @@ function ready() {
     // $('.sortInProgress').on('click', sortInProgress);
     // $('.sortComplete').on('click', sortDateCompleted);
 }
-
+// searchList function allows user to search for task with strings.
 function searchList(list) {
     let task = $('#todoIn').val();
     let date = $('#date').val();
@@ -48,6 +48,8 @@ function searchList(list) {
     return newList;
 }
 
+// searchTask function will GET list of all tasks and use 
+// searchList function to make new array of matching tasks
 function searchTask() {
     console.log('in searchTask');
 
@@ -76,11 +78,13 @@ function searchTask() {
     // });
 }
 
+// if 'All' on DOM is clicked, table will show all tasks.
 function showAll() {
     console.log('in showAll');
     getTodoList()
 }
 
+// if 'In Progress' on DOM is clicked, table will show all tasks.
 function showInProgress() {
     console.log('in showInProgress');
 
@@ -94,6 +98,7 @@ function showInProgress() {
     });
 }
 
+// if 'Completed' on DOM is clicked, table will show all tasks.
 function showCompleted() {
     console.log('in showCompleted');
 
@@ -107,6 +112,7 @@ function showCompleted() {
     });
 }
 
+// Will delete a task when the corresponding DELETE button is clicked
 function deleteTask() {
     console.log('in deleteTask on click');
     let id = $(this).closest('tr').data('id')
@@ -122,6 +128,7 @@ function deleteTask() {
     })
 }
 
+// Updates status of task when the corresponding COMPLETE button is clicked
 function completeTask() {
     console.log('in completeTask');
 
@@ -137,6 +144,7 @@ function completeTask() {
     })
 }
 
+// will add a Task and its Complete By date 
 function addTask() {
     console.log('in addTask on click');
     
@@ -158,6 +166,7 @@ function addTask() {
     })
 }
 
+// GETs list from the database
 function getTodoList() {
     console.log('in getTodoList');
     
@@ -171,6 +180,7 @@ function getTodoList() {
     });
 }
 
+// loops through list and appends them row by row
 function renderList(listOfTasks) {
     console.log(listOfTasks);
 
