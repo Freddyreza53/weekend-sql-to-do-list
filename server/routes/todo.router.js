@@ -67,6 +67,29 @@ todoRouter.get('/showCompleted', (req, res) => {
     });
 })
 
+// todoRouter.get('/searchTask', (req, res) => {
+//     console.log('in GET', req.body);
+
+//     let queryText = `
+//         SELECT * FROM "todo_list"
+//         WHERE "task" ILIKE $1 AND "complete_by_date" = $2;
+//     `;
+
+//     let values = [req.body.task, req.body.date];
+
+//     pool.query(queryText, values).then(todo_list => {
+//         console.log('from DB', todo_list.rows);
+//         for (const task of todo_list.rows) {
+//             task.complete_by_date = moment(task.complete_by_date).format('ddd, MMMM Do YYYY');
+//         }
+//         res.send(todo_list.rows)
+//     }).catch(error => {
+//         console.log('Error getting todo_list', error);
+//         res.sendStatus(500);
+//     });
+// })
+
+
 // GET list from DB completed only
 // todoRouter.get('/sortDateCompleted', (req, res) => {
 //     console.log('in GET');
@@ -105,7 +128,7 @@ todoRouter.post('/', (req, res) => {
     pool.query(queryText, values).then(response => {
         res.sendStatus(201);
     }).catch(error => {
-        console.log('Error adding new koala', error);
+        console.log('Error adding new task', error);
     });
 })
 
