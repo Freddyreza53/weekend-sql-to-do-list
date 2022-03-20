@@ -20,17 +20,7 @@
                 <input type="date" id="date">
                 <button type="submit" class="btn btn-primary" id="addBtn">Add</button>
             </div>
-            <ul class="showBar nav">
-                <li class="nav-item">
-                    <a class="all nav-link"  href="#">All</a>
-                </li>
-                <li class="nav-item">
-                    <a class="inProgress nav-link" href="#">In Progress</a>
-                </li>
-                <li class="nav-item">
-                    <a class="complete nav-link" href="#">Completed</a>
-                </li>
-            </ul>
+            
             <!-- <div>
                 <button>Completed</button>
                 <button>In Progress</button>
@@ -39,7 +29,7 @@
         </header>
 
         <main class="mainContainer">
-            <table>
+            <table class="scroll">
                 <thead>
                     <tr>
                         <th class="sortTask">Task</th>
@@ -55,6 +45,21 @@
                         <td>Action</td>
                     </tr> -->
                 </tbody>
+                <tfoot>
+                    <tr>
+                    <ul class="showBar nav">
+                        <li class="nav-item">
+                            <a class="all nav-link"  href="#">All</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="inProgress nav-link" href="#">In Progress</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="complete nav-link" href="#">Completed</a>
+                        </li>
+                    </ul>
+                </tr>
+                </tfoot>
             </table>
         </main>
     </div>
