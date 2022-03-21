@@ -45,6 +45,8 @@ function searchList(list) {
         // }
     }
 
+    $('#todoIn').val('');
+    $('#date').val('');
     return newList;
 }
 
