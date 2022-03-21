@@ -9,7 +9,7 @@ todoRouter.get('/', (req, res) => {
     console.log('in GET');
 
     let queryText = `
-        SELECT * FROM "todo_list";
+    SELECT * FROM "todo_list" ORDER BY "status", "complete_by_date";
     `;
 
     pool.query(queryText).then(todo_list => {
@@ -29,8 +29,9 @@ todoRouter.get('/showInProgress', (req, res) => {
     console.log('in GET');
 
     let queryText = `
-        SELECT * FROM "todo_list"
-        WHERE "status" = FALSE;
+        SELECT * FROM "todo_list" 
+        WHERE "status" = FALSE
+        ORDER BY "complete_by_date";
     `;
 
     pool.query(queryText).then(todo_list => {
@@ -50,9 +51,10 @@ todoRouter.get('/showCompleted', (req, res) => {
     console.log('in GET');
 
     let queryText = `
-        SELECT * FROM "todo_list"
-        WHERE "status" = TRUE;
-    `;
+        SELECT * FROM "todo_list" 
+        WHERE "status" = TRUE
+        ORDER BY "complete_by_date";
+        `;
 
     pool.query(queryText).then(todo_list => {
         console.log('from DB', todo_list.rows);
