@@ -2,7 +2,6 @@ const express = require('express');
 const todoRouter = express.Router();
 // DB Connection
 const pool = require('../modules/pool');
-// const { DateTime } = require("luxon");
 const moment = require('moment');
 
 // GET list from DB
