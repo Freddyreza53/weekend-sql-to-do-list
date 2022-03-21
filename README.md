@@ -19,7 +19,7 @@ To see the semi-functional site, please visit: https://warm-headland-60335.herok
 ## Installation
 
 1. Create database named "todo_list"
-2. The queries in the tables.sql file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on Postgres, so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries,
+2. The queries in the database.sql file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on Postgres, so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries,
 3. Open up your editor of choice and run an npm install.
 4. Run npm start in your terminal.
 5. Open browser and visit localhost:5000 to use site.
