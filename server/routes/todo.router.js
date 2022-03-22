@@ -114,6 +114,7 @@ todoRouter.get('/showCompleted', (req, res) => {
 // })
 
 // POST user data to DB
+// FIXME - use now() if date is empty
 todoRouter.post('/', (req, res) => {
     let newTask = req.body.task;
     let date = req.body.date;
